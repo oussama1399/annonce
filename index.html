@@ -12,20 +12,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Outfit:wght@400;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Montserrat:wght@400;600;700&display=swap"
         rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --dark-bg: #0f0c29;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-light: #e0e0e0;
-            --accent-color: #667eea;
+            --navy-blue: #1a2332;
+            --dark-navy: #0f1419;
+            --light-navy: #2c3e50;
+            --white: #ffffff;
+            --light-gray: #e8eef3;
+            --medium-gray: #b8c5d6;
+            --accent-blue: #3498db;
         }
 
         * {
@@ -35,15 +35,43 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            color: var(--text-light);
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--dark-navy) 0%, var(--navy-blue) 50%, var(--light-navy) 100%);
+            color: var(--white);
             min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Animated Background */
-        .bg-animation {
+        /* Animated Background Pattern */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(circle at 20% 50%, rgba(52, 152, 219, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(52, 152, 219, 0.1) 0%, transparent 50%);
+            animation: backgroundPulse 15s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes backgroundPulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Floating Particles */
+        .particles {
             position: fixed;
             top: 0;
             left: 0;
@@ -53,229 +81,330 @@
             overflow: hidden;
         }
 
-        .bg-animation span {
+        .particle {
             position: absolute;
-            display: block;
-            width: 20px;
-            height: 20px;
-            background: rgba(102, 126, 234, 0.2);
-            animation: float 25s infinite;
+            width: 4px;
+            height: 4px;
+            background: var(--light-gray);
             border-radius: 50%;
+            opacity: 0.3;
+            animation: particleFloat 20s infinite;
         }
 
-        .bg-animation span:nth-child(1) {
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .bg-animation span:nth-child(2) {
-            left: 20%;
-            animation-delay: 2s;
-            animation-duration: 20s;
-        }
-
-        .bg-animation span:nth-child(3) {
-            left: 30%;
-            animation-delay: 4s;
-        }
-
-        .bg-animation span:nth-child(4) {
-            left: 40%;
-            animation-delay: 6s;
-            animation-duration: 18s;
-        }
-
-        .bg-animation span:nth-child(5) {
-            left: 50%;
-            animation-delay: 8s;
-        }
-
-        .bg-animation span:nth-child(6) {
-            left: 60%;
-            animation-delay: 10s;
-            animation-duration: 22s;
-        }
-
-        .bg-animation span:nth-child(7) {
-            left: 70%;
-            animation-delay: 12s;
-        }
-
-        .bg-animation span:nth-child(8) {
-            left: 80%;
-            animation-delay: 14s;
-            animation-duration: 26s;
-        }
-
-        @keyframes float {
+        @keyframes particleFloat {
 
             0%,
             100% {
-                transform: translateY(100vh) scale(0);
+                transform: translateY(100vh) translateX(0);
                 opacity: 0;
             }
 
             10% {
-                opacity: 1;
+                opacity: 0.3;
             }
 
             90% {
-                opacity: 1;
+                opacity: 0.3;
             }
 
             100% {
-                transform: translateY(-100vh) scale(1);
+                transform: translateY(-100vh) translateX(100px);
             }
         }
 
-        /* Header */
+        /* Hero Section */
         .hero-section {
-            padding: 80px 0 60px;
+            padding: 100px 0 80px;
             text-align: center;
             position: relative;
         }
 
         .hero-badge {
             display: inline-block;
-            background: var(--primary-gradient);
-            padding: 8px 24px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-navy));
+            padding: 10px 30px;
             border-radius: 50px;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             font-weight: 600;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(52, 152, 219, 0.3);
+            animation: badgeFloat 3s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
         }
 
-        @keyframes pulse {
+        .hero-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 200%;
+            }
+        }
+
+        @keyframes badgeFloat {
 
             0%,
             100% {
-                transform: scale(1);
+                transform: translateY(0);
             }
 
             50% {
-                transform: scale(1.05);
+                transform: translateY(-8px);
             }
         }
 
         .hero-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #ffffff, #667eea);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--white);
             margin-bottom: 20px;
             line-height: 1.2;
+            animation: fadeInUp 1s ease-out;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: var(--text-light);
+            font-size: 1.4rem;
+            color: var(--light-gray);
             margin-bottom: 40px;
-            opacity: 0.9;
+            font-weight: 300;
+            animation: fadeInUp 1.2s ease-out;
         }
 
-        /* Cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Glass Cards */
         .glass-card {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            transition: all 0.3s ease;
+            padding: 35px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+            transition: left 0.6s;
+        }
+
+        .glass-card:hover::before {
+            left: 100%;
         }
 
         .glass-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-            border-color: rgba(102, 126, 234, 0.5);
+            transform: translateY(-12px);
+            box-shadow: 0 20px 50px rgba(52, 152, 219, 0.2);
+            border-color: rgba(52, 152, 219, 0.4);
         }
 
+        /* Profile Section */
         .profile-section {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         .profile-avatar {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-navy));
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 4rem;
-            color: white;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            margin: 0 auto 25px;
+            font-size: 4.5rem;
+            color: var(--white);
+            box-shadow: 0 15px 40px rgba(52, 152, 219, 0.3);
+            animation: avatarFloat 6s ease-in-out infinite;
+            position: relative;
+        }
+
+        .profile-avatar::after {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: -8px;
+            right: -8px;
+            bottom: -8px;
+            border-radius: 50%;
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes avatarFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes ringPulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
         }
 
         .profile-name {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            color: var(--white);
         }
 
         .profile-title {
-            font-size: 1.1rem;
-            color: #667eea;
+            font-size: 1.2rem;
+            color: var(--accent-blue);
             font-weight: 600;
         }
 
         .badge-item {
             display: inline-block;
-            background: rgba(102, 126, 234, 0.2);
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin: 5px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(102, 126, 234, 0.3);
+            background: rgba(52, 152, 219, 0.15);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin: 8px;
+            font-size: 0.95rem;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            transition: all 0.3s ease;
+            color: var(--light-gray);
+        }
+
+        .badge-item:hover {
+            background: rgba(52, 152, 219, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
         /* Module Cards */
         .module-card {
-            background: var(--primary-gradient);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 15px;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-navy));
+            border-radius: 18px;
+            padding: 30px;
+            margin-bottom: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.2);
+        }
+
+        .module-card::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .module-card:hover::before {
+            width: 400px;
+            height: 400px;
         }
 
         .module-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+            transform: translateY(-12px) scale(1.03);
+            box-shadow: 0 20px 50px rgba(52, 152, 219, 0.4);
         }
 
         .module-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            animation: iconBounce 3s ease-in-out infinite;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes iconBounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
         }
 
         .module-title {
             font-weight: 700;
-            font-size: 1.2rem;
-            margin-bottom: 5px;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
         }
 
         .module-desc {
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
         }
 
-        /* Pricing Tables */
+        /* Pricing Cards */
         .pricing-card {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            border: 2px solid rgba(102, 126, 234, 0.3);
-            padding: 40px 30px;
+            border-radius: 25px;
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            padding: 45px 35px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
 
         .pricing-card::before {
@@ -285,8 +414,8 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
-            transition: left 0.5s;
+            background: linear-gradient(90deg, transparent, rgba(52, 152, 219, 0.1), transparent);
+            transition: left 0.6s;
         }
 
         .pricing-card:hover::before {
@@ -294,41 +423,45 @@
         }
 
         .pricing-card:hover {
-            transform: translateY(-10px);
-            border-color: #667eea;
-            box-shadow: 0 20px 50px rgba(102, 126, 234, 0.4);
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--accent-blue);
+            box-shadow: 0 25px 60px rgba(52, 152, 219, 0.3);
+        }
+
+        .pricing-card>* {
+            position: relative;
+            z-index: 1;
         }
 
         .pricing-badge {
-            background: var(--secondary-gradient);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-navy));
+            color: var(--white);
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.85rem;
             font-weight: 600;
             display: inline-block;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
         }
 
         .pricing-title {
-            font-size: 1.8rem;
+            font-size: 1.9rem;
             font-weight: 700;
             margin-bottom: 20px;
+            color: var(--white);
+            transition: color 0.3s ease;
+        }
+
+        .pricing-card:hover .pricing-title {
+            color: var(--accent-blue);
         }
 
         .pricing-price {
-            font-size: 3rem;
+            font-size: 3.2rem;
             font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-        }
-
-        .pricing-period {
-            color: #999;
-            margin-bottom: 30px;
+            color: var(--accent-blue);
+            margin-bottom: 12px;
         }
 
         .pricing-features {
@@ -338,8 +471,15 @@
         }
 
         .pricing-features li {
-            padding: 12px 0;
+            padding: 14px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            color: var(--light-gray);
+        }
+
+        .pricing-features li:hover {
+            padding-left: 12px;
+            color: var(--white);
         }
 
         .pricing-features li:last-child {
@@ -347,31 +487,44 @@
         }
 
         .pricing-features i {
-            color: #4facfe;
-            margin-right: 10px;
+            color: var(--accent-blue);
+            margin-right: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .pricing-features li:hover i {
+            transform: scale(1.2);
         }
 
         /* Table Styling */
         .custom-table {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.03);
             border-radius: 15px;
             overflow: hidden;
             margin-bottom: 30px;
         }
 
         .custom-table thead {
-            background: var(--primary-gradient);
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-navy));
         }
 
         .custom-table th {
             padding: 20px;
             font-weight: 700;
             border: none;
+            color: var(--white);
         }
 
         .custom-table td {
             padding: 20px;
             border-color: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            color: var(--white);
+        }
+
+        .custom-table td strong {
+            color: var(--white);
+            font-weight: 700;
         }
 
         .custom-table tbody tr {
@@ -379,78 +532,154 @@
         }
 
         .custom-table tbody tr:hover {
-            background: rgba(102, 126, 234, 0.2);
+            background: rgba(52, 152, 219, 0.15);
+            transform: scale(1.01);
         }
 
-        /* CTA Button */
+        /* CTA Buttons */
         .cta-button {
-            background: var(--primary-gradient);
-            color: white;
-            padding: 18px 50px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-navy));
+            color: var(--white);
+            padding: 18px 55px;
             border-radius: 50px;
             font-size: 1.2rem;
             font-weight: 700;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             text-decoration: none;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .cta-button:hover::before {
+            width: 350px;
+            height: 350px;
         }
 
         .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
-            color: white;
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(52, 152, 219, 0.5);
+            color: var(--white);
         }
 
+        .cta-button i {
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover i {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        /* Contact Section */
         .contact-section {
-            background: rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 60px 40px;
+            border-radius: 25px;
+            padding: 70px 50px;
             text-align: center;
-            margin-top: 60px;
-            border: 1px solid rgba(102, 126, 234, 0.3);
+            margin-top: 80px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(52, 152, 219, 0.1), transparent 70%);
+            animation: contactPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes contactPulse {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .contact-info {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-top: 30px;
+            gap: 50px;
+            margin-top: 40px;
             flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 18px;
             font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-8px);
         }
 
         .contact-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--primary-gradient);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--light-navy));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: rotate(360deg);
         }
 
         /* Section Titles */
         .section-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
             font-weight: 700;
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 60px;
             position: relative;
-            padding-bottom: 20px;
+            padding-bottom: 25px;
+            color: var(--white);
         }
 
         .section-title::after {
@@ -459,10 +688,40 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 100px;
+            width: 120px;
             height: 4px;
-            background: var(--primary-gradient);
+            background: linear-gradient(90deg, transparent, var(--accent-blue), transparent);
             border-radius: 2px;
+            animation: lineExpand 3s ease-in-out infinite;
+        }
+
+        @keyframes lineExpand {
+
+            0%,
+            100% {
+                width: 120px;
+            }
+
+            50% {
+                width: 180px;
+            }
+        }
+
+        /* Alert Box */
+        .alert-info {
+            background: rgba(52, 152, 219, 0.15);
+            border: 2px solid rgba(52, 152, 219, 0.3);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            color: var(--light-gray);
+        }
+
+        /* Footer */
+        footer {
+            opacity: 0.7;
+            font-size: 0.95rem;
+            color: var(--medium-gray);
         }
 
         /* Responsive */
@@ -475,28 +734,31 @@
                 font-size: 1.1rem;
             }
 
+            .section-title {
+                font-size: 2rem;
+            }
+
             .pricing-card {
                 margin-bottom: 30px;
             }
 
             .contact-info {
                 flex-direction: column;
-                gap: 20px;
+                gap: 25px;
+            }
+
+            .profile-avatar {
+                width: 130px;
+                height: 130px;
+                font-size: 3.5rem;
             }
         }
 
-        /* Scroll Animation */
+        /* Fade In Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(40px);
             animation: fadeInUp 0.8s ease forwards;
-        }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .fade-in:nth-child(1) {
@@ -518,17 +780,8 @@
 </head>
 
 <body>
-    <!-- Animated Background -->
-    <div class="bg-animation">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -553,9 +806,13 @@
             <div class="row mt-5">
                 <div class="col-md-6 mb-4">
                     <div class="glass-card">
-                        <h4><i class="fas fa-graduation-cap"></i> Parcours Prestigieux</h4>
-                        <p class="mt-3">Ancien étudiant en filière <strong>MP*</strong> (Mathématiques et Physique) aux
-                            CPGE de <strong>Moulay Youssef</strong></p>
+                        <h4 style="color: var(--accent-blue); margin-bottom: 20px;">
+                            <i class="fas fa-graduation-cap"></i> Parcours Prestigieux
+                        </h4>
+                        <p class="mt-3" style="color: var(--light-gray);">
+                            Ancien étudiant en filière <strong style="color: var(--white);">MP*</strong> (Mathématiques
+                            et Physique) aux CPGE de <strong style="color: var(--white);">Moulay Youssef</strong>
+                        </p>
                         <div class="badge-item">
                             <i class="fas fa-star"></i> Classes Préparatoires
                         </div>
@@ -563,8 +820,12 @@
                 </div>
                 <div class="col-md-6 mb-4">
                     <div class="glass-card">
-                        <h4><i class="fas fa-laptop-code"></i> Formation Actuelle</h4>
-                        <p class="mt-3">Cycle d'Ingénierie en <strong>3ème année</strong> à l'<strong>ENSIAS</strong>
+                        <h4 style="color: var(--accent-blue); margin-bottom: 20px;">
+                            <i class="fas fa-laptop-code"></i> Formation Actuelle
+                        </h4>
+                        <p class="mt-3" style="color: var(--light-gray);">
+                            Cycle d'Ingénierie en <strong style="color: var(--white);">3ème année</strong> à l'<strong
+                                style="color: var(--white);">ENSIAS</strong>
                         </p>
                         <div class="badge-item">
                             <i class="fas fa-trophy"></i> École d'Ingénieurs
@@ -625,7 +886,8 @@
                         <i class="fas fa-user"></i> Coaching Personnalisé
                     </div>
                     <h3 class="pricing-title">Formule Individuelle</h3>
-                    <p class="mb-4">Idéale pour combler des lacunes spécifiques ou pour une préparation intensive</p>
+                    <p class="mb-4" style="color: var(--light-gray);">Idéale pour combler des lacunes spécifiques ou
+                        pour une préparation intensive</p>
 
                     <table class="table custom-table">
                         <thead>
@@ -639,12 +901,12 @@
                             <tr>
                                 <td><strong>Séance Unique</strong></td>
                                 <td>À la demande</td>
-                                <td><span class="pricing-price" style="font-size: 1.5rem;">100 DH</span></td>
+                                <td><span class="pricing-price" style="font-size: 1.6rem;">100 DH</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Forfait Mensuel</strong></td>
                                 <td>4 séances/mois</td>
-                                <td><span class="pricing-price" style="font-size: 1.5rem;">300 DH</span></td>
+                                <td><span class="pricing-price" style="font-size: 1.6rem;">300 DH</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -663,7 +925,8 @@
                         <i class="fas fa-users"></i> Dynamique & Collaborative
                     </div>
                     <h3 class="pricing-title">Formule en Groupe</h3>
-                    <p class="mb-4">Une approche économique et stimulante pour échanger et progresser ensemble</p>
+                    <p class="mb-4" style="color: var(--light-gray);">Une approche économique et stimulante pour
+                        échanger et progresser ensemble</p>
 
                     <table class="table custom-table">
                         <thead>
@@ -675,19 +938,19 @@
                         <tbody>
                             <tr>
                                 <td><strong>1 Module Unique</strong></td>
-                                <td><span class="pricing-price" style="font-size: 1.5rem;">200 DH</span></td>
+                                <td><span class="pricing-price" style="font-size: 1.6rem;">200 DH</span></td>
                             </tr>
                             <tr>
                                 <td><strong>2 Modules et +</strong></td>
-                                <td><span class="pricing-price" style="font-size: 1.5rem;">150
+                                <td><span class="pricing-price" style="font-size: 1.6rem;">150
                                         DH</span><br><small>/module</small></td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div class="alert alert-info"
-                        style="background: rgba(79, 172, 254, 0.2); border: 1px solid rgba(79, 172, 254, 0.4); border-radius: 10px;">
-                        <strong>Exemple:</strong> 3 modules = 3 × 150 DH = <strong>450 DH/mois</strong>
+                    <div class="alert-info">
+                        <strong style="color: var(--accent-blue);">Exemple:</strong> 3 modules = 3 × 150 DH = <strong
+                            style="color: var(--white);">450 DH/mois</strong>
                     </div>
 
                     <ul class="pricing-features">
@@ -699,10 +962,9 @@
             </div>
         </div>
 
-        <div class="alert fade-in"
-            style="background: rgba(102, 126, 234, 0.2); border: 2px solid rgba(102, 126, 234, 0.4); border-radius: 15px; padding: 20px;">
-            <i class="fas fa-info-circle"></i> <strong>Note importante:</strong> Les cours de groupe sont organisés par
-            module (ex: un groupe pour Algèbre 1, un autre pour Analyse 2).
+        <div class="alert-info fade-in">
+            <i class="fas fa-info-circle"></i> <strong style="color: var(--accent-blue);">Note importante:</strong> Les
+            cours de groupe sont organisés par module (ex: un groupe pour Algèbre 1, un autre pour Analyse 2).
         </div>
     </section>
 
@@ -712,9 +974,11 @@
             <h2 class="section-title">
                 <i class="fas fa-phone-alt"></i> Contact et Inscription
             </h2>
-            <p style="font-size: 1.2rem; margin-bottom: 30px;">
+            <p
+                style="font-size: 1.2rem; margin-bottom: 30px; color: var(--light-gray); position: relative; z-index: 1;">
                 Ne laissez pas les difficultés vous freiner.<br>
-                Contactez-moi dès aujourd'hui pour plus de détails et pour réserver votre place.
+                <strong style="color: var(--white);">Contactez-moi dès aujourd'hui</strong> pour plus de détails et pour
+                réserver votre place.
             </p>
 
             <div class="contact-info">
@@ -723,8 +987,8 @@
                         <i class="fas fa-user"></i>
                     </div>
                     <div>
-                        <div style="font-size: 0.9rem; opacity: 0.7;">Votre contact</div>
-                        <div style="font-weight: 700;">Oussama</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7; color: var(--medium-gray);">Votre contact</div>
+                        <div style="font-weight: 700; color: var(--white);">Oussama</div>
                     </div>
                 </div>
                 <div class="contact-item">
@@ -732,32 +996,49 @@
                         <i class="fas fa-phone"></i>
                     </div>
                     <div>
-                        <div style="font-size: 0.9rem; opacity: 0.7;">Téléphone</div>
-                        <div style="font-weight: 700;">0634350272</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7; color: var(--medium-gray);">Téléphone</div>
+                        <div style="font-weight: 700; color: var(--white);">0634350272</div>
                     </div>
                 </div>
             </div>
 
             <a href="tel:0634350272" class="cta-button mt-5">
                 <i class="fas fa-phone-alt"></i>
-                Appelez Maintenant
+                <span>Appelez Maintenant</span>
             </a>
 
             <a href="https://wa.me/212634350272" class="cta-button mt-3"
-                style="background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);">
+                style="background: linear-gradient(135deg, #25D366, #128C7E);">
                 <i class="fab fa-whatsapp"></i>
-                WhatsApp
+                <span>WhatsApp</span>
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="text-center py-4" style="opacity: 0.7;">
+    <footer class="text-center py-5">
         <p>&copy; 2024 Oussama - Cours de Soutien MI | Tous droits réservés</p>
     </footer>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Particles Animation -->
+    <script>
+        // Create floating particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 15 + 15) + 's';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
 </body>
 
 </html>
